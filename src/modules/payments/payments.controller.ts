@@ -23,7 +23,7 @@ export class PaymentsController {
     return this.paymentsService.create(createPaymentDto);
   }
 
-  @Post()
+  @Post('order-event')
   createFromOrderEvent(
     @Body() orderEvent: PubsubPostBody,
     @Query() params: TokenAuthQueryParam,
