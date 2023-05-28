@@ -6,8 +6,11 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
-import { CreatePaymentDto } from './dto/create-payment.dto';
+import { TokenAuthQueryParam } from '../../common/dtos/token-auth-qs.dto';
+import { PubsubPostBody } from '../../common/pubsub/interfaces/pubsub-post-body';
+import { CreatePaymentDto, OrderEventDTO } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
 import { PaymentsService } from './services/payments.service';
 
@@ -18,6 +21,16 @@ export class PaymentsController {
   @Post()
   create(@Body() createPaymentDto: CreatePaymentDto) {
     return this.paymentsService.create(createPaymentDto);
+  }
+
+  @Post()
+  createFromOrderEvent(
+    @Body() orderEvent: PubsubPostBody,
+    @Query() params: TokenAuthQueryParam,
+  ) {
+    const orderEventDto: OrderEventDTO = orderEvent.message
+      .data as unknown as OrderEventDTO;
+    return this.paymentsService.createFromOrderEvent(orderEventDto);
   }
 
   @Get()

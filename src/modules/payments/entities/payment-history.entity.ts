@@ -21,7 +21,10 @@ export class PaymentHistory extends BaseEntity {
 
   @ManyToOne(() => PaymentMethod)
   @JoinColumn({ name: 'payment_method_id' })
-  payment_method: PaymentMethod;
+  payment_method?: PaymentMethod;
+
+  @Column()
+  payment_method_id: number;
 
   @Column()
   payment_date: Date;
@@ -31,5 +34,8 @@ export class PaymentHistory extends BaseEntity {
 
   @ManyToOne(() => PaymentStatus)
   @JoinColumn({ name: 'payment_status_id' })
-  payment_status: PaymentStatus;
+  payment_status?: PaymentStatus;
+
+  @Column()
+  payment_status_id: number;
 }

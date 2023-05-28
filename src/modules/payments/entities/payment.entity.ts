@@ -27,13 +27,30 @@ export class Payment extends BaseEntity {
   @JoinColumn({ name: 'payment_method_id' })
   payment_method: PaymentMethod;
 
+  @Column()
+  payment_method_id: number;
+
   @ManyToOne(() => PaymentStatus)
   @JoinColumn({ name: 'payment_status_id' })
   payment_status: PaymentStatus;
 
   @Column()
+  payment_status_id: number;
+
+  @Column()
   payment_date: Date;
 
   @Column()
+  payment_amount: number;
+}
+
+export interface PaymentRecord {
+  payment_id?: number;
+  payment_uuid: string;
+  order_uuid: string;
+  payment_method_id: number;
+  payment_method?: PaymentMethod;
+  payment_status?: PaymentStatus;
+  payment_date: Date;
   payment_amount: number;
 }

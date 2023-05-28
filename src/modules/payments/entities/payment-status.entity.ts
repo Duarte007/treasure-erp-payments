@@ -9,3 +9,10 @@ export class PaymentStatus extends BaseEntity {
   @Column()
   payment_status_name: string;
 }
+
+export enum PaymentStatusEnum {
+  PENDING = 1,
+  COMPLETED = 2,
+  CANCELED = 3,
+  REFUNDED = 4,
+}
